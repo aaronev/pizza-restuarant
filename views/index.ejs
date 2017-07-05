@@ -1,0 +1,30 @@
+<a href="/login">Login</a>
+<a href="/logout">Logout</a>
+<h3>Customers<h3>
+<table class="customers">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Username</th>
+		<th>Password</th>
+		<th>Address</th>
+		<th>Phone Number</th>
+		<th>Payment Method</th>
+	</tr>
+	<% customers.forEach(function(customer) { %>
+		<tr>	
+			<td><%= customer.id%></td>
+			<td><%= customer.name%></td>
+			<td><%=customer.username%></td>
+			<td><%=customer.password%></td>
+			<td><%=customer.address%></td>
+			<td><%=customer.phone%></td>
+			<td><%=customer.payment%></td>
+			<form method="delete" action="/customer/<%=customer.id%>">
+			<td><input type="submit" value="Delete"></td>
+			<form>
+		</tr>
+	<% }) %>
+</table>
+
+<h3>Pizza<h3>

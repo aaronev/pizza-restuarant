@@ -3,6 +3,11 @@ DROP TABLE IF EXISTS drinks;
 DROP TABLE IF EXISTS preferences;
 DROP TABLE IF EXISTS customers;
 
+CREATE TABLE admit(
+  username TEXT,
+  password TEXT
+);
+
 CREATE TABLE customers (
   id SERIAL PRIMARY KEY,
   name TEXT,

@@ -1,3 +1,8 @@
+INSERT INTO 
+  admit (username, password)
+VALUES
+  ('manager', 'manager');
+
 INSERT INTO
   customers (name, username, password, address, phone, payment)
 VALUES
