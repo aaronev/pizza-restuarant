@@ -1,5 +1,5 @@
 INSERT INTO 
-  admit (username, password)
+  admin (username, password)
 VALUES
   ('manager', 'manager');
 

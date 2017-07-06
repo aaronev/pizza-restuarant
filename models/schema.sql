@@ -1,9 +1,10 @@
+DROP TABLE IF EXISTS admin;
 DROP TABLE IF EXISTS pizza;
 DROP TABLE IF EXISTS drinks;
 DROP TABLE IF EXISTS preferences;
 DROP TABLE IF EXISTS customers;
 
-CREATE TABLE admit(
+CREATE TABLE admin(
   username TEXT,
   password TEXT
 );
