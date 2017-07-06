@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS admin;
-DROP TABLE IF EXISTS pizza;
+DROP TABLE IF EXISTS pizzas;
 DROP TABLE IF EXISTS drinks;
 DROP TABLE IF EXISTS preferences;
 DROP TABLE IF EXISTS customers;
 
-CREATE TABLE admin(
+CREATE TABLE admin (
   username TEXT,
   password TEXT
 );
@@ -32,7 +32,8 @@ CREATE TABLE drinks (
   price TEXT
 );
 
-CREATE TABLE pizza (
+CREATE TABLE pizzas (
+  id SERIAL PRIMARY KEY,
   size TEXT,
   types TEXT,
   ingredients TEXT,

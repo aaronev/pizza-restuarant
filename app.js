@@ -37,7 +37,6 @@ passport.deserializeUser((username, done) => {
 passport.use(new LocalStrategy((username, password, done) => {
   db.get.adminByUsernamePassword(username, password)
   .then( user => {
-    console.log('im in the Strategy with user info', user)
       if (user) {
         test = user
         return done(null, user[0]) 
@@ -53,8 +52,17 @@ app.route('/')
       res.redirect('/login')
     } else {
       db.get.allCustomers
-      .then((customers) => {
-        res.render('index', {customers})
+      .then(customers => {
+        db.get.allPreferences
+        .then(preferences => {
+          db.get.allPizzas
+          .then(pizzas => {
+            db.get.allDrinks
+            .then(drinks => {
+              res.render('index', {customers, preferences, pizzas, drinks})
+            })
+          })
+        })
       }).catch(next)
     }
   })
@@ -63,10 +71,30 @@ app.route('/login')
   .get((req, res, next) => {
     res.render('login')
   })
-  .post(passport.authenticate('local',{
+  .post(passport.authenticate('local', {
     successRedirect:'/',
     failureRedirect: '/login'
   }))
+
+app.route('/delete/:table/:id')
+  .get((req, res, next) => {
+    const { table, id } = req.params
+    console.log('im in the delete route')
+    if (table === 'customers') {
+      db.delInfo('preferences', 'customer_id', id)
+      .then(() => {
+        db.delInfo(table, 'id', id)
+        .then(() => {
+          res.redirect('/')
+        }).catch(next)
+      })
+    } else {
+      db.delInfo(table, 'id', id)
+      .then(() => {
+        res.redirect('/')
+      }).catch(next)
+    }
+  })
 
 app.route('/logout')
   .get((req, res, next) => {

@@ -9,6 +9,7 @@
 		<th>Address</th>
 		<th>Phone Number</th>
 		<th>Payment Method</th>
+		<th>Preferences</th>
 	</tr>
 	<% customers.forEach(function(customer) { %>
 		<tr>	
@@ -19,11 +20,58 @@
 			<td><%=customer.address%></td>
 			<td><%=customer.phone%></td>
 			<td><%=customer.payment%></td>
-			<form method="delete" action="/customer/<%=customer.id%>">
-			<td><input type="submit" value="Delete"></td>
-			<form>
+		<% preferences.forEach(function(preference) { %>
+			<% if (preference.customer_id === customer.id) { %>
+				<td><%= preference.ingredients %></td>
+			<% } %>
+		<% }) %>
+			<form method="get" action="/delete/customers/<%=customer.id%>">
+				<td><input type="submit" value="Delete"></td>
+			</form>
 		</tr>
 	<% }) %>
 </table>
 
-<h3>Pizza<h3>
+<h3>Pizzas<h3>
+<table class="pizzas">
+	<tr>
+		<th>Size</th>
+		<th>Types</th>
+		<th>Ingredients</th>
+		<th>Price</th>
+		<th>Happy Hour</th>
+	</tr>
+	<% pizzas.forEach(function(pizza) { %>
+		<tr>	
+			<td><%= pizza.size%></td>
+			<td><%= pizza.types%></td>
+			<td><%=pizza.ingredients%></td>
+			<td><%=pizza.price%></td>
+			<td><%=pizza.happy_hour%></td>
+			<form method="get" action="/delete/pizzas/<%=pizza.id%>">
+			<td><input type="submit" value="Delete"></td>
+			</form>
+		</tr>
+	<% }) %>
+</table>
+
+<h3>Drinks<h3>
+<table class="drinks">
+	<tr>
+		<th>Description</th>
+		<th>Manufacturer</th>
+		<th>Supplier</th>
+		<th>Price</th>
+	</tr>
+	<% drinks.forEach(function(drink) { %>
+		<tr>	
+			<td><%= drink.description%></td>
+			<td><%= drink.manufacturer%></td>
+			<td><%=drink.supplier%></td>
+			<td><%=drink.price%></td>
+			<form method="get" action="/delete/drinks/<%=drink.id%>">
+			<td><input type="submit" value="Delete"></td>
+			</form>
+		</tr>
+	<% }) %>
+</table>

@@ -27,7 +27,7 @@ VALUES
   ('water', 'Desani', 'coke', '$2');
 
 INSERT INTO
-  pizza (size, types, ingredients, price, happy_hour)
+  pizzas (size, types, ingredients, price, happy_hour)
 VALUES
   ('small', 'thin crust', 'pepperoni', '$3', '$2'),
   ('medium', 'thick crust', 'combo', '$5', '$4'),
