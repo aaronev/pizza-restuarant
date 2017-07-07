@@ -1,24 +1,35 @@
 {
-  "name": "app-starter",
+  "name": "pizza-restuarant",
   "version": "1.0.0",
   "description": "This is a basic app generator. I find it annoying to keep creating a new app with basically the same folders and files needed for own projects.",
   "main": "app.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "db:create": "createdb pizza_restuarant",
+    "db:drop": "dropdb pizza_restuarant",
+    "db:schema": "psql -d pizza_restuarant < ./models/schema.sql",
+    "db:seed": "psql -d pizza_restuarant < ./models/seed.sql",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aaronev/app-starter.git"
+    "url": "git+https://github.com/aaronev/pizza-restuarant.git"
   },
   "author": "Aaron Villanueva",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aaronev/app-starter/issues"
+    "url": "https://github.com/aaronev/pizza-restuarant/issues"
   },
-  "homepage": "https://github.com/aaronev/app-starter#readme",
+  "homepage": "https://github.com/aaronev/pizza-restuarant#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pg-promise": "^6.2.3"
-  }
+  },
+  "devDependencies": {}
 }
