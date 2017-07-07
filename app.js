@@ -7,9 +7,6 @@ const LocalStrategy = require('passport-local').Strategy
 const app = express()
 const port = 3000
 
-
-var test = null
-
 require('ejs')
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
@@ -18,28 +15,27 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
   secret: 'secret',
   cookie: {maxAge: 60000},
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }))
-
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.serializeUser( (user, done) => {
-  done(null, user.username)
+
+passport.serializeUser((users, done) => {
+  done(null, users.username)
 })
 
 passport.deserializeUser((username, done) => {
   db.get.adminByUsername(username)
-  .then( user => done(null, user))
+  .then( users => done(null, users))
 })
 
 passport.use(new LocalStrategy((username, password, done) => {
   db.get.adminByUsernamePassword(username, password)
-  .then( user => {
-      if (user) {
-        test = user
-        return done(null, user[0]) 
+  .then( users => {
+      if (users) {
+        return done(null, users[0]) 
       } else { 
         return done(null, false) 
       }
@@ -48,7 +44,7 @@ passport.use(new LocalStrategy((username, password, done) => {
 
 app.route('/')
   .get((req, res, next) => {
-    if (!test) {
+    if (!req.user) {
       res.redirect('/login')
     } else {
       db.get.allCustomers
@@ -98,35 +94,8 @@ app.route('/delete/:table/:id')
 
 app.route('/logout')
   .get((req, res, next) => {
-    test = null
+    req.logout()
     res.redirect('/')
   })
 
-
 app.listen(port, console.log(`Listening to port ${port}`))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -84,7 +84,7 @@ Can track **pizza** data:
 - [ ] Table names are singular, not plural.
 - [ ] Variables, functions, files, etc. have appropriate and meaningful names.
 - [ ] Code is well organized into a meaningful file structure.
-- [ ] The artifact produced is properly licensed, preferably with the [MIT license](https://opensource.org/licenses/MIT).
+- [x] The artifact produced is properly licensed, preferably with the [MIT license](https://opensource.org/licenses/MIT).
 
 There are commands provided (using `npm run` and/or with executable scripts in a `bin/` directory) to:
 - [x] Create the database
