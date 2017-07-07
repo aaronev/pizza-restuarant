@@ -7,6 +7,7 @@ const allInfo = table => queries.any(`SELECT * FROM ${table};`)
 const delInfo = (table, column, value) => queries.none(`DELETE FROM ${table} WHERE ${column} = $1;`, value)
 const usernamePassword = (username, password) => queries.any(
   'SELECT * FROM admin WHERE username = $1 and password = $2;', [username, password])
+const addTo = (table, config, values) => queries.any(`INSERT INTO ${table} ${config} VALUES (${values});`)
 
 const get = {
   allCustomers: allInfo('customers'),
@@ -17,4 +18,10 @@ const get = {
   adminByUsernamePassword: (username, password) => usernamePassword(username, password)
 }
 
-module.exports = { get, delInfo }
+const add = {
+  customer: values => addTo('customers', '(name, username, password, address, phone, payment)', values),
+  pizza: values => addTo('pizzas', '(size, types, ingredients, price, happy_hour)', values),
+  drink: values => addTo('drinks', '(description, manufacturer, supplier, price)', values)
+}
+
+module.exports = { get, add, delInfo }
